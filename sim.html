@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;VentSim &amp;mdash; VC/AC Prototype&lt;/title&gt;</p>
+<p class="p1">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--bg:<span class="Apple-converted-space">            </span>#0a0e14;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--panel: <span class="Apple-converted-space">        </span>#111820;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--panel-2: <span class="Apple-converted-space">      </span>#0d131a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--line:<span class="Apple-converted-space">          </span>#1c2530;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--line-soft: <span class="Apple-converted-space">    </span>#161e27;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text:<span class="Apple-converted-space">          </span>#dde4ec;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text-dim:<span class="Apple-converted-space">      </span>#7c8a99;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text-faint:<span class="Apple-converted-space">    </span>#4a5563;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--instructor:<span class="Apple-converted-space">    </span>#c98a3e;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--instructor-bg: rgba(201,138,62,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--learner: <span class="Apple-converted-space">      </span>#3e8fc9;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--learner-bg:<span class="Apple-converted-space">    </span>rgba(62,143,201,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--pressure:<span class="Apple-converted-space">      </span>#f5a623;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--flow:<span class="Apple-converted-space">          </span>#4fd8c4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--volume:<span class="Apple-converted-space">        </span>#8fb8ff;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--insp-tint: <span class="Apple-converted-space">    </span>rgba(255,255,255,0.025);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--alert: <span class="Apple-converted-space">        </span>#ff5c5c;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--alert-bg:<span class="Apple-converted-space">      </span>rgba(255,92,92,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--good:<span class="Apple-converted-space">          </span>#6fd08c;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--radius:<span class="Apple-converted-space">        </span>10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>*{box-sizing:border-box;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>html,body{margin:0;padding:0;background:var(--bg);color:var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family:'IBM Plex Sans',system-ui,sans-serif;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.app{max-width:1400px;margin:0 auto;padding:20px 20px 40px;}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>header.top{display:flex;align-items:baseline;justify-content:space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-wrap:wrap;gap:10px;margin-bottom:18px;padding-bottom:14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom:1px solid var(--line);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>header.top .brand{display:flex;align-items:baseline;gap:12px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>header.top h1{font-size:18px;font-weight:600;letter-spacing:0.02em;margin:0;color:var(--text);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>header.top .mode-badge{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color:var(--bg);background:var(--pressure);padding:3px 9px;border-radius:5px;letter-spacing:0.03em;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>header.top .sub{color:var(--text-dim);font-size:12.5px;}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.layout{display:grid;grid-template-columns:1fr 320px;gap:18px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width:920px){.layout{grid-template-columns:1fr;}}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ---- waveform panel ---- */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scope{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding:14px 14px 8px;position:relative;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scope-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scope-head .title{font-size:11.5px;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.transport{display:flex;gap:8px;align-items:center;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>canvas#scope{width:100%;height:520px;display:block;border-radius:6px;background:var(--bg);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.legend{display:flex;gap:18px;margin-top:8px;font-size:11.5px;color:var(--text-dim);flex-wrap:wrap;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.legend span{display:inline-flex;align-items:center;gap:6px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:10px;margin-top:12px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readout{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 11px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readout .label{font-size:10px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.07em;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readout .value{font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;margin-top:3px;color:var(--text);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readout .unit{font-size:11px;color:var(--text-dim);margin-left:3px;font-weight:400;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readout.alert{border-color:var(--alert);background:var(--alert-bg);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readout.alert .value{color:var(--alert);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.readout.ok .value{color:var(--good);}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ---- side panels ---- */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.side{display:flex;flex-direction:column;gap:14px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel{border-radius:var(--radius);border:1px solid var(--line);overflow:hidden;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel-head{display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel-body{padding:14px;background:var(--panel);}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel.instructor .panel-head{background:var(--instructor-bg);color:var(--instructor);border-bottom:1px solid rgba(201,138,62,0.25);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel.learner .panel-head{background:var(--learner-bg);color:var(--learner);border-bottom:1px solid rgba(62,143,201,0.25);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.lock{font-size:12px;opacity:0.85;}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>select.preset{width:100%;background:var(--panel-2);color:var(--text);border:1px solid var(--line);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius:6px;padding:7px 8px;font-size:12.5px;margin-bottom:12px;font-family:'IBM Plex Sans',sans-serif;}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.field{margin-bottom:13px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.field:last-child{margin-bottom:0;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.field-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.field-row label{font-size:12.5px;color:var(--text);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.field-row .val{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--text-dim);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>input[type=range]{width:100%;accent-color:currentColor;height:4px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel.instructor input[type=range]{color:var(--instructor);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel.learner input[type=range]{color:var(--learner);}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn{font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600;border-radius:7px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border:1px solid var(--line);background:var(--panel);color:var(--text);padding:7px 14px;cursor:pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition:background .15s;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn:hover{background:#182029;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn.primary{background:var(--pressure);color:#1a1204;border-color:var(--pressure);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn.primary:hover{filter:brightness(1.08);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn.ghost{background:transparent;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn:active{transform:translateY(1px);}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.note{font-size:11.5px;color:var(--text-faint);line-height:1.5;margin-top:10px;padding-top:10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top:1px solid var(--line-soft);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.footer-note{margin-top:18px;font-size:11.5px;color:var(--text-faint);line-height:1.6;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.footer-note b{color:var(--text-dim);}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div class="app"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;header class="top"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="brand"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1&gt;VentSim &lt;span style="color:var(--text-faint);font-weight:400;"&gt;/ prototype&lt;/span&gt;&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-badge"&gt;VC/AC&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sub"&gt;Single-compartment lung model &amp;middot; small animal mechanical ventilation training&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="layout"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- WAVEFORM SCOPE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="scope"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="scope-head"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="title"&gt;Pressure &amp;middot; Flow &amp;middot; Volume &amp;mdash; real time&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="transport"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn ghost" id="resetBtn"&gt;Reset&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn primary" id="playBtn"&gt;Start&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;canvas id="scope" width="1200" height="560"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="legend"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;&lt;i class="swatch" style="background:var(--pressure)"&gt;&lt;/i&gt;Paw &amp;nbsp;cmH&lt;sub&gt;2&lt;/sub&gt;O&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;&lt;i class="swatch" style="background:var(--flow)"&gt;&lt;/i&gt;Flow &amp;nbsp;L/min&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;&lt;i class="swatch" style="background:var(--volume)"&gt;&lt;/i&gt;Volume &amp;nbsp;mL&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="readouts"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="readout"&gt;&lt;div class="label"&gt;Ppeak&lt;/div&gt;&lt;div class="value" id="roPpeak"&gt;&amp;mdash;&lt;span class="unit"&gt;cmH₂O&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="readout"&gt;&lt;div class="label"&gt;Vte&lt;/div&gt;&lt;div class="value" id="roVte"&gt;&amp;mdash;&lt;span class="unit"&gt;mL&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="readout"&gt;&lt;div class="label"&gt;I : E&lt;/div&gt;&lt;div class="value" id="roIE"&gt;&amp;mdash;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="readout"&gt;&lt;div class="label"&gt;τ (RC)&lt;/div&gt;&lt;div class="value" id="roTau"&gt;&amp;mdash;&lt;span class="unit"&gt;s&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="readout" id="roAutoPeepBox"&gt;&lt;div class="label"&gt;Auto-PEEP&lt;/div&gt;&lt;div class="value" id="roAutoPeep"&gt;none&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- SIDE CONTROLS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="side"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel instructor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="panel-head"&gt;&lt;span class="lock"&gt;&amp;#128274;&lt;/span&gt; Instructor &amp;middot; Respiratory Mechanics&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="panel-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;select class="preset" id="presetSelect"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="custom"&gt;Custom values&amp;hellip;&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="dog_normal"&gt;Canine &amp;mdash; normal&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="cat_normal"&gt;Feline &amp;mdash; normal&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="cat_obstructive"&gt;Feline &amp;mdash; obstructive (asthma)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="dog_restrictive"&gt;Canine &amp;mdash; restrictive (fibrosis)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="dog_obstructive"&gt;Canine &amp;mdash; obstructive (bronchitis)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/select&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="field-row"&gt;&lt;label&gt;Resistance (R)&lt;/label&gt;&lt;span class="val" id="vR"&gt;8.0 cmH₂O/L/s&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="range" id="R" min="2" max="40" step="0.5" value="8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="field-row"&gt;&lt;label&gt;Compliance (C)&lt;/label&gt;&lt;span class="val" id="vC"&gt;20 mL/cmH₂O&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="range" id="C" min="3" max="60" step="1" value="20"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="note"&gt;Illustrative teaching values, not validated clinical reference ranges. τ = R × C determines how fast the system fills and empties.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel learner"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="panel-head"&gt;&lt;span&gt;&amp;#9881;&lt;/span&gt; Learner &amp;middot; Ventilator Settings&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="panel-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="field-row"&gt;&lt;label&gt;Tidal Volume (Vt)&lt;/label&gt;&lt;span class="val" id="vVt"&gt;300 mL&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="range" id="Vt" min="50" max="600" step="10" value="300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="field-row"&gt;&lt;label&gt;Inspiratory Time (Ti)&lt;/label&gt;&lt;span class="val" id="vTi"&gt;1.0 s&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="range" id="Ti" min="0.3" max="2.0" step="0.05" value="1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="field-row"&gt;&lt;label&gt;Respiratory Rate&lt;/label&gt;&lt;span class="val" id="vRR"&gt;14 /min&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="range" id="RR" min="6" max="40" step="1" value="14"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="field-row"&gt;&lt;label&gt;PEEP&lt;/label&gt;&lt;span class="val" id="vPEEP"&gt;3 cmH₂O&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="range" id="PEEP" min="0" max="20" step="1" value="3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="field"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="field-row"&gt;&lt;label&gt;FiO₂&lt;/label&gt;&lt;span class="val" id="vFiO2"&gt;40 %&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="range" id="FiO2" min="21" max="100" step="1" value="40"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="footer-note"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;b&gt;What to watch:&lt;/b&gt; shorten Ti relative to τ and volume delivery becomes flow-limited. Shorten Te (raise RR) relative to τ and exhalation can't finish before the next breath &amp;mdash; watch the volume trace fail to return to baseline and Auto-PEEP appear.</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">(function(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>"use strict";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---------- state ----------</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const cfg = { R:8, C:20, Vt:300, Ti:1.0, RR:14, PEEP:3, FiO2:40 };</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const sim = {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>running:false,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>V_L:0,<span class="Apple-converted-space">            </span>// volume above PEEP baseline, litres</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tInBreath:0,<span class="Apple-converted-space">      </span>// seconds since start of current breath</p>
+<p class="p1"><span class="Apple-converted-space">    </span>clock:0,<span class="Apple-converted-space">          </span>// total elapsed sim time, seconds</p>
+<p class="p1"><span class="Apple-converted-space">    </span>buffer:[],<span class="Apple-converted-space">        </span>// {t,P,F,V}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>curPpeak:0,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>lastVte:null,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>breathVpeak:0,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>lastTrapped_mL:0</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const WINDOW_S = 10;<span class="Apple-converted-space">      </span>// seconds visible on scope</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const DT = 1/120; <span class="Apple-converted-space">        </span>// integration step (s)</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const presets = {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>dog_normal:<span class="Apple-converted-space">      </span>{R:8,<span class="Apple-converted-space">  </span>C:25},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cat_normal:<span class="Apple-converted-space">      </span>{R:12, C:9},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cat_obstructive: {R:30, C:9},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>dog_restrictive: {R:9,<span class="Apple-converted-space">  </span>C:8},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>dog_obstructive: {R:22, C:22}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---------- element refs ----------</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const el = id =&gt; document.getElementById(id);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const inputs = ['R','C','Vt','Ti','RR','PEEP','FiO2'];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const suffix = {R:' cmH₂O/L/s', C:' mL/cmH₂O', Vt:' mL', Ti:' s', RR:' /min', PEEP:' cmH₂O', FiO2:' %'};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function syncLabels(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('vR').textContent<span class="Apple-converted-space">    </span>= cfg.R.toFixed(1) + suffix.R;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('vC').textContent<span class="Apple-converted-space">    </span>= cfg.C.toFixed(0) + suffix.C;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('vVt').textContent <span class="Apple-converted-space">  </span>= cfg.Vt.toFixed(0) + suffix.Vt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('vTi').textContent <span class="Apple-converted-space">  </span>= cfg.Ti.toFixed(2) + suffix.Ti;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('vRR').textContent <span class="Apple-converted-space">  </span>= cfg.RR.toFixed(0) + suffix.RR;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('vPEEP').textContent = cfg.PEEP.toFixed(0) + suffix.PEEP;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('vFiO2').textContent = cfg.FiO2.toFixed(0) + suffix.FiO2;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>inputs.forEach(k=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el(k).addEventListener('input', e=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cfg[k] = parseFloat(e.target.value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(k==='R' || k==='C') el('presetSelect').value = 'custom';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>syncLabels();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>recomputeAxes();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>el('presetSelect').addEventListener('change', e=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const p = presets[e.target.value];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!p) return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cfg.R = p.R; cfg.C = p.C;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('R').value = p.R; el('C').value = p.C;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>syncLabels();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>recomputeAxes();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---------- derived quantities ----------</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let tau, period, Te, VtL, C_L, insFlow_Ls;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let pMax, fMax, vMax;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function recomputeDerived(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>C_L = cfg.C/1000;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tau = cfg.R * C_L; <span class="Apple-converted-space">                    </span>// seconds</p>
+<p class="p1"><span class="Apple-converted-space">    </span>period = 60/cfg.RR;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Te = Math.max(0.05, period - cfg.Ti);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>VtL = cfg.Vt/1000;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>insFlow_Ls = VtL/cfg.Ti;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>function recomputeAxes(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>recomputeDerived();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const estPeakP = cfg.PEEP + (VtL/C_L) + cfg.R*insFlow_Ls;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pMax = Math.max(40, estPeakP*1.25);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const peakFlowLmin = insFlow_Ls*60;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fMax = Math.max(40, peakFlowLmin*1.3);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>vMax = Math.max(150, cfg.Vt*1.5);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('roTau').innerHTML = tau.toFixed(2)+'&lt;span class="unit"&gt;s&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const ie = (cfg.Ti/Te);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('roIE').textContent = '1 : ' + (1/ie).toFixed(1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---------- simulation step ----------</p>
+<p class="p1"><span class="Apple-converted-space">  </span>function step(dt){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>recomputeDerived();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const insp = sim.tInBreath &lt; cfg.Ti;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let flow_Ls;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(insp){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flow_Ls = insFlow_Ls;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flow_Ls = tau&gt;0 ? -(sim.V_L/tau) : 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.V_L += flow_Ls*dt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(sim.V_L &lt; 0) sim.V_L = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const Paw = sim.V_L/C_L + cfg.R*flow_Ls + cfg.PEEP;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(insp){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sim.breathVpeak = sim.V_L;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sim.curPpeak = Paw;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.clock += dt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.tInBreath += dt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.buffer.push({t:sim.clock, P:Paw, F:flow_Ls*60, V:sim.V_L*1000});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const cutoff = sim.clock - WINDOW_S - 0.5;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>while(sim.buffer.length &amp;&amp; sim.buffer[0].t &lt; cutoff) sim.buffer.shift();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(sim.tInBreath &gt;= period){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// breath boundary: whatever volume remains above baseline is trapped gas</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sim.lastTrapped_mL = sim.V_L*1000;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sim.lastVte = (sim.breathVpeak - sim.V_L)*1000;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sim.tInBreath -= period;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>updateReadouts();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function updateReadouts(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('roPpeak').innerHTML = sim.curPpeak.toFixed(1)+'&lt;span class="unit"&gt;cmH₂O&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('roVte').innerHTML = (sim.lastVte==null? '&amp;mdash;' : sim.lastVte.toFixed(0))+'&lt;span class="unit"&gt;mL&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const box = el('roAutoPeepBox');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const trapped = sim.lastTrapped_mL||0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(trapped &gt; 8){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const pTrap = (trapped/1000)/C_L;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>el('roAutoPeep').innerHTML = pTrap.toFixed(1)+'&lt;span class="unit"&gt;cmH₂O&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box.classList.add('alert'); box.classList.remove('ok');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>el('roAutoPeep').textContent = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box.classList.remove('alert'); box.classList.add('ok');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---------- rendering ----------</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const canvas = el('scope');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const ctx = canvas.getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>function resizeCanvas(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const rect = canvas.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const ratio = window.devicePixelRatio||1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>canvas.width = rect.width*ratio;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>canvas.height = rect.height*ratio;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.setTransform(ratio,0,0,ratio,0,0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>window.addEventListener('resize', resizeCanvas);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const bandLabels = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{key:'P', name:'Paw<span class="Apple-converted-space">  </span>cmH₂O', color:getVar('--pressure'), get max(){return pMax;}, zero:0},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{key:'F', name:'Flow<span class="Apple-converted-space">  </span>L/min', color:getVar('--flow'), get max(){return fMax;}, zero:'mid'},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{key:'V', name:'Volume<span class="Apple-converted-space">  </span>mL', color:getVar('--volume'), get max(){return vMax;}, zero:0}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>function getVar(name){return getComputedStyle(document.documentElement).getPropertyValue(name).trim();}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function draw(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const w = canvas.clientWidth, h = canvas.clientHeight;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.clearRect(0,0,w,h);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const gap = 10;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const bandH = (h - gap*4)/3;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>bandLabels.forEach((band, i)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const top = gap + i*(bandH+gap);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>drawBand(band, top, bandH, w);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// playhead line</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeStyle = 'rgba(255,255,255,0.15)';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.moveTo(w-2,0); ctx.lineTo(w-2,h);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.stroke();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function drawBand(band, top, bandH, w){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// background + border</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillStyle = getVar('--panel-2');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillRect(0, top, w, bandH);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeStyle = getVar('--line-soft');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeRect(0.5, top+0.5, w-1, bandH-1);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// grid: horizontal</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeStyle = getVar('--line-soft');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.lineWidth = 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(let g=1; g&lt;4; g++){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const y = top + bandH*g/4;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// vertical time gridlines every 1s</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(let s=0; s&lt;=WINDOW_S; s++){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const x = w - (s/WINDOW_S)*w;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ctx.beginPath(); ctx.moveTo(x,top); ctx.lineTo(x,top+bandH); ctx.stroke();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// zero / baseline reference line</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const valToY = v=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(band.zero==='mid'){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return top + bandH/2 - (v/band.max)*(bandH/2);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return top + bandH - (v/band.max)*bandH;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeStyle = 'rgba(255,255,255,0.18)';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const zy = valToY(0);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.setLineDash([3,3]);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.beginPath(); ctx.moveTo(0,zy); ctx.lineTo(w,zy); ctx.stroke();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.setLineDash([]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// label</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillStyle = getVar('--text-faint');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.font = '11px "IBM Plex Mono", monospace';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillText(band.name, 8, top+14);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// trace</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(sim.buffer.length &gt; 1){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineWidth = 1.8;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ctx.strokeStyle = band.color;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineJoin = 'round';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let started = false;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for(let i=0;i&lt;sim.buffer.length;i++){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const s = sim.buffer[i];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const x = w - (sim.clock - s.t)/WINDOW_S * w;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(x &lt; -5) continue;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const y = valToY(s[band.key]);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!started){ ctx.moveTo(x,y); started = true; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>else ctx.lineTo(x,y);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ctx.stroke();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---------- main loop ----------</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let lastTs = null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>function frame(ts){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!sim.running){ lastTs = null; return; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(lastTs==null) lastTs = ts;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let elapsed = (ts-lastTs)/1000;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>lastTs = ts;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>elapsed = Math.min(elapsed, 0.1); // clamp huge gaps (tab switch etc)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let remaining = elapsed;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>while(remaining &gt; 0){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dt = Math.min(DT, remaining);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>step(dt);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>remaining -= dt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>draw();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>requestAnimationFrame(frame);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>el('playBtn').addEventListener('click', ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.running = !sim.running;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('playBtn').textContent = sim.running ? 'Pause' : 'Start';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(sim.running) requestAnimationFrame(frame);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>el('resetBtn').addEventListener('click', ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.running = false;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el('playBtn').textContent = 'Start';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.V_L = 0; sim.tInBreath = 0; sim.clock = 0; sim.buffer = [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sim.curPpeak = 0; sim.lastVte = null; sim.breathVpeak = 0; sim.lastTrapped_mL = 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>updateReadouts();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>resizeCanvas();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>draw();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---------- init ----------</p>
+<p class="p1"><span class="Apple-converted-space">  </span>syncLabels();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>recomputeAxes();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>resizeCanvas();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>draw();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updateReadouts();</p>
+<p class="p1">})();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
